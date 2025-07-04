@@ -1,0 +1,14 @@
+{
+    "name": "utn/inv-op",
+    "description": "Proj-inv-op",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Utn\\InvOp\\": "src/"
+        }
+    },
+    "minimum-stability": "RC",
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}

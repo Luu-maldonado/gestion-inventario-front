@@ -1,0 +1,5 @@
+/vendor/
+/node_modules/
+/tmpnpm-cache/
+/UserslucimAppDataLocalnpm-cache/
+

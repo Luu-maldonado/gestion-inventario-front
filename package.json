@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "htmlhint": "^1.6.3"
+  },
+  "dependencies": {
+    "katex": "^0.16.22"
+  }
+}
