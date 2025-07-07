@@ -20,6 +20,9 @@ switch ($modulo) {
     case 'ventas':
         $file = "$baseDir/ventas/ventas-$action.php";
         break;
+    case 'demanda':
+        $file = "$baseDir/demanda/demanda-$action.php";
+        break;
     default:
         $file = "$baseDir/maestro_articulos/maestro-articulos-abm-art.php";
         break;
@@ -31,6 +34,7 @@ if (!file_exists($file)) {
         'ordenes' => "$baseDir/orden_compra/orden-compra-gestion-oc.php",
         'proveedores' => "$baseDir/proveedores/proveedor-abm-prov.php",
         'ventas' => "$baseDir/ventas/ventas-generar.php",
+        'demanda' => "$baseDir/demanda/demanda-calc.php",
         default => "$baseDir/maestro_articulos/maestro-articulos-abm-art.php",
     };
 }
