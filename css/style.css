@@ -1069,3 +1069,57 @@ footer {
 #descuentoContainer p {
   margin: 0.3em 0;
 }
+
+.fila-final-demanda {
+  background-color: #004c4c;
+  color: #bfffff;
+  font-weight: bold;
+  border: 2px solid #00cccc;
+  border-radius: 6px;
+}
+
+.fila-final-demanda td {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.leyenda-demanda td {
+  font-size: 0.8em;
+  color: #b0e0e6;
+  text-align: center;
+  padding-top: 4px;
+  border: none;
+}
+
+.error-box {
+  background-color: #440000;
+  color: #fff;
+  padding: 1em;
+  margin: 1em 0;
+  border-left: 4px solid red;
+  border-radius: 4px;
+  position: relative;
+}
+
+.boton-recargar {
+  background-color: #005577;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+.boton-recargar:hover {
+  background-color: #007799;
+}
+
+.boton-recargar.disabled,
+.boton-recargar[disabled] {
+  background-color: #663333; /* grisáceo rojizo */
+  color: #ddd;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.7;
+}
