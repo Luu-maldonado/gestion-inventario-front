@@ -1117,7 +1117,7 @@ footer {
 
 .boton-recargar.disabled,
 .boton-recargar[disabled] {
-  background-color: #663333; /* grisáceo rojizo */
+  background-color: #663333; 
   color: #ddd;
   pointer-events: none;
   cursor: default;
