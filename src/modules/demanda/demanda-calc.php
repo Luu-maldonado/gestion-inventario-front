@@ -9,6 +9,13 @@ $articulos = [];
 $error = null;
 $resultado = null;
 $tipoPrediccion = $_POST['tipoPrediccion'] ?? null;
+$tiposPrediccionNombres = [
+    1=>'Promedio móvil',
+    2=>'Promedio móvil ponderado',
+    3=>'Suavización exponencial',
+    4=>'Regresión lineal'
+  ];
+$tipoPrediccionNombre = $tipoPrediccion && isset($tiposPrediccionNombres[$tipoPrediccion]) ? $tiposPrediccionNombres[$tipoPrediccion] : null;
 $periodo = $_POST['periodo'] ?? null;
 $alfa = $_POST['alfa'] ?? null;
 $idArticulo = $_POST['idArticulo'] ?? null;
@@ -20,6 +27,16 @@ try {
     $error = $err->getMessage();
 }
 
+$nombreArticuloSeleccionado = null;
+if ($idArticulo && !empty($articulos)) {
+    foreach ($articulos as $art) {
+        if ($art['idArticulo'] == $idArticulo) {
+            $nombreArticuloSeleccionado = $art['nombreArticulo'];
+            break;
+        }
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $idArticulo && $tipoPrediccion && $periodo) {
     $query = [
         'idArticulo' => $idArticulo,
@@ -28,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $idArticulo && $tipoPrediccion && $
     ];
     if ($tipoPrediccion == 3 && $alfa !== null) {
         $query['alfa'] = $alfa;
+        $alfaMostrar = (float)$alfa;
     }
 
 try {
@@ -94,9 +112,15 @@ try {
 
   <div style="flex-grow: 1; padding-left: 8px;">
     <?php if ($resultado): ?>
-      <h3>• Resultados •</h3>
+      <h3>
+        • Resultados <?= $tipoPrediccionNombre ? "({$tipoPrediccionNombre})" : '' ?>
+        <?= $nombreArticuloSeleccionado ? " — Artículo: [{$idArticulo}] <em>{$nombreArticuloSeleccionado}</em>" : '' ?> •
+      </h3>
       <p><strong>Demanda estimada = </strong> <?= $resultado['demanda'] ?></p>
       <p><strong>Desviación estandar = </strong> <?= $resultado['desviacionEstandarPeriodo'] ?></p>
+      <?php if (isset($alfaMostrar)): ?>
+        <p><strong>α = </strong> <?= $alfaMostrar ?></p>
+      <?php endif; ?>
 
       <?php if (!empty($resultado['valoresTabla'])): ?>
         
