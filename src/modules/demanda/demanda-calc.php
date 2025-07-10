@@ -191,14 +191,14 @@ try {
     alfaInputDiv.style.display = this.value === '3' ? 'block' : 'none';
   });
 
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', function (err) {
     const tipoPrediccion = tipoPrediccionSelect.value;
 
     if (tipoPrediccion === '3') {
       const alfa = parseFloat(alfaInput.value);
 
       if (isNaN(alfa) || alfa < 0 || alfa > 1) {
-        e.preventDefault();
+        err.preventDefault();
         alert(' Ingrese un valor de alfa válido ');
         alfaInput.focus();
         return false;
