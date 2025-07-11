@@ -48,9 +48,9 @@
             let articuloSeleccionado = null;
 
             async function cargarProveedores(idArticulo, elementoLi) {
-                // Resaltar artículo seleccionado
+                
                 if (articuloSeleccionado) articuloSeleccionado.style.backgroundColor = '';
-                elementoLi.style.backgroundColor =" #006658"; // verde claro
+                elementoLi.style.backgroundColor =" #006658"; 
                 articuloSeleccionado = elementoLi;
 
                 infoProveedores.innerHTML = '<p>Cargando proveedores...</p>';

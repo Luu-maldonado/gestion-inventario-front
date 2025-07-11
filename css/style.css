@@ -5,12 +5,14 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
 body {
   flex:1;
   background-color: black;
   color: white;
   font-family: Arial, sans-serif;
 }
+
 /*Header - navigation*/
 nav {
     background-color: #111;
@@ -18,26 +20,31 @@ nav {
     padding: 1em;
     font-family: Arial, sans-serif;
 }
+
 main {
   flex: 1;
 }
+
 .logo{
   display: inline-block;
   font-weight: bold;
   font-size: 1.2em;
 }
+
 .menu{
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   justify-content: center;
 }
+
 .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap
 }
+
 nav a {
     color: white;
     margin-right: 1.5em;
@@ -45,9 +52,11 @@ nav a {
     font-weight: bold;
     transition: color 0.3s ease;
 }
+
 nav a:hover {
     color: #005252;
 }
+
 nav a.activo-nav {
   background-color: #008b8b; 
   color:  white;
@@ -55,15 +64,18 @@ nav a.activo-nav {
   border-radius: 6px;
   padding: 0.4em 0.8em;
 }
+
 .menu a{
   color: white;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
 }
+
 .menu a:hover {
   color: #008b8b;
 }
+
 .menu a:last-child {
   margin-right: 0;
 }
@@ -73,6 +85,7 @@ nav a.activo-nav {
     align-items: center;
   }
 }
+
 /*Menu links*/
 .menu li a {
   display: block;
@@ -82,6 +95,7 @@ nav a.activo-nav {
   border-radius: 4px;
   transition: background-color 0.3s;
 }
+
 .menu li a.activo {
   background-color: #c8f7c5; 
   border: 1px solid #a3d9a5;
@@ -98,23 +112,28 @@ nav a.activo-nav {
   transition: background-color 0.3s;
   background-color: #333;
 }
+
 .tab-link:hover {
   background-color: #e6ffe6;
 }
+
 .tab-link.active-tab-module {
   background-color: #008b8b; 
   color: white;
   border: 1px solid #006666;
 }
+
 .tabs-container {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;
   margin: 1em 0;
 }
+
 .tabs-container a {
   white-space: nowrap;
 }
+
 /*Footer*/
 footer {
     background-color: #111;
@@ -128,6 +147,7 @@ footer {
     box-sizing: border-box;
     margin-top: 5em;
 }
+
 .tabla-base {
   width: 90%;
   margin: 0 auto;
@@ -152,10 +172,12 @@ footer {
 .tabla-base tr:hover {
   background-color: #333;
 }
+
 .tabla-base td.acciones-col {
   white-space: nowrap;
   text-align: center;
 }
+
 .tabla-base td.acciones-col button {
   padding: 0.3em 0.6em;
   margin: 0 0.2em;
@@ -197,6 +219,7 @@ footer {
     max-height: 90vh; 
     overflow-y: auto;   
 }
+
 .modal-content h3 {
   margin-top: 2em;
   margin-bottom: 0.5em;
@@ -204,6 +227,7 @@ footer {
   margin-right:1em;
   font-size: 1.5em;
 }
+
 .modal-content label {
   display: block;
   margin-bottom: 0;
@@ -249,6 +273,7 @@ footer {
 .modal-content .boton-accion:hover {
   background-color: #006666;
 }
+
 .modal > .close {
   position: absolute;
   top: 0.3em;
@@ -257,6 +282,7 @@ footer {
   cursor: pointer;
   font-size: 30px;
 }
+
 .modal-content .close {
   color: white;
   position: absolute;
@@ -267,9 +293,11 @@ footer {
   font-weight: bold;
   cursor: pointer;
 }
+
 .modal-content .close:hover {
   color: #008b8b;
 }
+
 .modal-content.modal-proveedores {
   max-width: 90vw;    
   width: 90%;
@@ -288,6 +316,7 @@ footer {
   font-size: 30px;
   cursor: pointer;
 }
+
 /* Modal Advertencia */
 .modal-content.advertencia {
   border-left: 6px solid red;
@@ -314,6 +343,44 @@ footer {
   border: 1px solid #555;
   padding: 8px 12px;
 }
+
+.tabla-contenedor {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh; 
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #000;
+}
+
+.table-scroll-wrapper {
+  overflow-y: auto;
+  flex-grow: 1;   
+}
+
+.table-scroll-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  table-layout: auto; 
+}
+
+.table-scroll-wrapper thead {
+  position: sticky;
+  top: 0;
+  background-color: #111;
+  z-index: 2; 
+}
+
+.table-scroll-wrapper th,
+.table-scroll-wrapper td {
+  border: 1px solid #555;
+  padding: 8px 12px;
+  white-space: normal; 
+  word-break: keep-all; 
+  overflow-wrap: break-word;
+}
+
 /* Header de tabla con acciones */
 .table-header {
   display: flex;
@@ -321,9 +388,11 @@ footer {
   align-items: center;
   margin-bottom: 0.5em;
 }
+
 .acciones button {
   margin-left: 1em;
 }
+
 .boton-accion {
   display: inline-flex;
   align-items: center;
@@ -337,9 +406,19 @@ footer {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+.boton-accion:disabled {
+  background-color: #444;
+  color: #ccc;
+  cursor: not-allowed;
+  border: 1px solid #666;
+  opacity: 0.7;
+}
+
 .boton-accion:hover {
   background-color: #006666;
 }
+
 .boton-icono {
   background: #004444;          
   color: #004444;             
@@ -454,6 +533,7 @@ footer {
 .info-proveedores h4 {
   margin-top: 0;
 }
+
 /* Lista Artículos */
 .lista-articulos {
   padding: 1em;
@@ -566,6 +646,7 @@ footer {
   border-bottom: 1px solid;
   margin-bottom: 4px;
 }
+
 .articulo-item:hover {
   background: #333;
 }
@@ -575,6 +656,7 @@ footer {
   border-radius: 6px;
   border: 1px solid transparent;
 }
+
 /* Flex para formularios */
 .flex-row {
     display: flex;
@@ -582,10 +664,12 @@ footer {
     align-items: flex-end; 
     flex-wrap: wrap; 
 }
+
 .flex-row label {
     display: flex;
     flex-direction: column;
 }
+
 /* Botón advertencia */
 .boton-advertencia {
   background: none;
@@ -703,11 +787,13 @@ footer {
 .tabla-base tr:hover {
   background-color: #333;
 }
+
 .proveedor-articulos-container {
   display: flex;
   height: calc(100vh - 160px);
   gap: 1em;
 }
+
 .columna {
   flex: 1;
   background: black;
@@ -716,6 +802,7 @@ footer {
   overflow-y: auto;
   border-right: 1px solid #555;
 }
+
 #formEdicionRelacionContainer form {
   margin-top: 1em;
 }
@@ -743,14 +830,17 @@ footer {
 #formEdicionRelacionContainer button:hover {
   background-color: #006666;
 }
+
 .proveedor-articulos-container {
   display: flex;
   height: calc(100vh - 160px);
   gap: 1em;
 }
+
 .columna-articulos-relacionados {
   flex: 2;
 }
+
 .lista-suspendidos {
   list-style: none;
   padding: 0;
@@ -770,10 +860,12 @@ footer {
   padding: 1em 0;
   text-align: center;
 }
+
 #detalleArticuloSeleccionado {
   flex: 1;
   overflow-y: visible; 
 }
+
 #detalleArticuloSeleccionado form {
   display: flex;
   flex-direction: column;
@@ -842,6 +934,7 @@ footer {
   overflow-y: auto;
   border-top: 1px solid #333;
 }
+
 .columna-lateral {
   width: 25%;
   border-right: 1px solid #555;
@@ -851,18 +944,21 @@ footer {
   border-left: 1px solid #555;
   border-right: none;
 }
+
 .contenedor-flex {
   display: flex;
   gap: 1em;
   flex: 1;
   overflow-y: auto;
 }
+
 .header-detalles-orden {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5em;
 }
+
 .contenedor-lista-oc-x-art {
   flex: 1;
   display: flex;
@@ -876,6 +972,7 @@ footer {
   margin: 1em 0;
   overflow: hidden;
 }
+
 .detalle-item {
   width: 100%;
   box-sizing: border-box;
@@ -886,6 +983,7 @@ footer {
   border-bottom: 1px solid #333; /* si querés líneas */
   padding-bottom: 0.3em;
 }
+
 .orden-item {
   cursor: pointer;
   background: transparent;
@@ -902,6 +1000,14 @@ footer {
 .orden-item.selected {
   background: #007777; /* Color cuando está seleccionado */
   color: white;
+}
+
+.disabled-articulo {
+  border: 1px solid #888;
+  font-style: italic;
+  color: #aaa;
+  background-color: #1a1a1a;
+  pointer-events: none;
 }
 
 /* ===================
@@ -1068,4 +1174,58 @@ footer {
 
 #descuentoContainer p {
   margin: 0.3em 0;
+}
+
+.fila-final-demanda {
+  background-color: #004c4c;
+  color: #bfffff;
+  font-weight: bold;
+  border: 2px solid #00cccc;
+  border-radius: 6px;
+}
+
+.fila-final-demanda td {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.leyenda-demanda td {
+  font-size: 0.8em;
+  color: #b0e0e6;
+  text-align: center;
+  padding-top: 4px;
+  border: none;
+}
+
+.error-box {
+  background-color: #440000;
+  color: #fff;
+  padding: 1em;
+  margin: 1em 0;
+  border-left: 4px solid red;
+  border-radius: 4px;
+  position: relative;
+}
+
+.boton-recargar {
+  background-color: #005577;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9em;
+  display: inline-block;
+}
+
+.boton-recargar:hover {
+  background-color: #007799;
+}
+
+.boton-recargar.disabled,
+.boton-recargar[disabled] {
+  background-color: #663333; 
+  color: #ddd;
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.7;
 }

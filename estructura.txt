@@ -1,0 +1,28 @@
+/src/modules/
+│
+├── maestro_articulos/
+│   	├── maestro-articulos-abm-art
+│   	├── maestro-articulos-lista-art-faltantes
+│   	├── maestro-articulos-lista-art-reponer
+│   	├── maestro-articulos-lista-prov-x-art
+│   	└── maestro-articulos-prov-pred
+│
+├── orden_compra/
+│   	├── orden-compra-gestion-oc
+│   	├── orden-compra-lista-x-art
+│   	└── orden-compra-mod-oc
+│
+├── proveedores/
+│   	├── proveedor-abm-prov
+│   	├── proveedor-historico-est-prov
+│   	├── proveedor-listado-art-x-prov
+│   	├── proveedor-prov-art
+│   	└── proveedor-restaurar-susp
+│ 
+├── ventas/
+│  	├── ventas-generar
+│	├── ventas-precio-art
+│  	└── ventas-lista-vent-x-art
+│
+└── demanda/
+	└── demanda-calc

@@ -12,4 +12,3 @@ frontend para sistema de gestión de inventario
 * ``npm install`` 
 ### para levantar servidor, ejecutar:
 * ``php -S localhost:8008``
-

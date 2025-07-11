@@ -21,7 +21,7 @@ include __DIR__ . '/../../tabs/orden-compra-tabs.php';
       <h3>Detalles de Orden</h3>
       <div class="header-detalles-orden">
         <div id="infoProveedorActual" class="info-proveedor"></div>
-        <button id="btnCambiarProveedor" type="button" class="boton-accion ">Cambiar proveedor</button>
+        <button id="btnCambiarProveedor" type="button" class="boton-accion " disabled>Cambiar proveedor</button>
       </div>
       <form id="formDetallesOrden">
         <table class="tabla-base">
@@ -35,7 +35,7 @@ include __DIR__ . '/../../tabs/orden-compra-tabs.php';
           </thead>
           <tbody id="tablaDetallesEditar"></tbody>
         </table>
-        <button id="btnGuardarCambios" type="submit" class="boton-accion">Guardar cambios</button>
+        <button id="btnGuardarCambios" type="submit" class="boton-accion" disabled>Guardar cambios</button>
       </form>
       <div id="mensajeAdvertencias"  class="mensaje-advertencias"></div>
     </div>
@@ -61,16 +61,19 @@ async function cargarOrdenesPendientes() {
   ordenesPendientes.forEach(oc => {
     const li = document.createElement('li');
     li.textContent = `#${oc.nOrdenCompra} - ${oc.proveedor}`;
-    li.classList.add('articulo-item'); // Aplica estilo base
+    li.classList.add('articulo-item'); 
     li.className="articulo-item";
-    li.onclick = () => seleccionarOrden(oc, li); // Pasa el li
+    li.onclick = () => seleccionarOrden(oc, li); 
     ul.appendChild(li);
   });
+  document.getElementById('btnCambiarProveedor').disabled = true;
+  document.getElementById('btnGuardarCambios').disabled = true;
 }
 
 async function seleccionarOrden(orden, liSeleccionado) {
   ordenSeleccionada = orden;
-
+  document.getElementById('btnCambiarProveedor').disabled = false;
+  document.getElementById('btnGuardarCambios').disabled = false;
   document.querySelectorAll('#listaOrdenesPendientes li.articulo-item').forEach(li => {
     li.classList.remove('selected');
   });
@@ -271,7 +274,7 @@ document.getElementById('btnCambiarProveedor').addEventListener('click', async (
       tr.innerHTML = `
         <td>${p.idProveedor}</td>
         <td>${p.nombreProveedor}</td>
-        <td><button class="boton-accion" data-id="${p.idProveedor}" data-nombre="${encodeURIComponent(p.nombreProveedor)}">Seleccionar</button></td>
+        <td><button class="boton-accion btnSeleccionarProveedor" data-id="${p.idProveedor}" data-nombre="${encodeURIComponent(p.nombreProveedor)}">Seleccionar</button></td>
       `;
       tbody.appendChild(tr);
     });
