@@ -381,6 +381,17 @@ footer {
   overflow-wrap: break-word;
 }
 
+.katex-fraccion {
+  display: inline-block;
+  margin-left: 6px;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table-scroll-wrapper td:nth-child(6) {
+  white-space: nowrap;
+}
+
 /* Header de tabla con acciones */
 .table-header {
   display: flex;
