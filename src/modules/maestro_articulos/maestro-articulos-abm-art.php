@@ -490,7 +490,8 @@
         </div>
     </div>
 
-    <div class="table-wrapper">
+    <div class="tabla-contenedor">
+      <div class="table-scroll-wrapper">
         <table>
             <thead>
                 <tr>
@@ -605,6 +606,7 @@
                 <?php endif; ?>
             </tbody>
         </table>
+      </div>
     </div>
 
     <?= $modalesAdvertencia ?>

@@ -91,15 +91,13 @@ li.addEventListener('mouseover', () => {
     }
   });
 
-  // Emular SELECTED con onclick
   li.addEventListener('click', () => {
-    // Desmarcar todos los demás
+
     document.querySelectorAll('#listaArticulosDisponibles li').forEach(el => {
       el.dataset.selected = '';
       el.style.backgroundColor = 'transparent';
     });
 
-    // Marcar este como seleccionado
     li.dataset.selected = 'true';
     li.style.backgroundColor = '#008b8b';
     li.style.color = 'white';
@@ -115,7 +113,7 @@ li.addEventListener('mouseover', () => {
 
 function seleccionarArticulo(articulo) {
   if (articulosVenta.find(a => a.idArticulo === articulo.idArticulo)) return;
-  articulosVenta.push({ idArticulo: articulo.idArticulo, cantidadArticulo: 1 });
+  articulosVenta.push({ idArticulo: articulo.idArticulo,nombreArticulo: articulo.nombreArticulo, cantidadArticulo: 1 });
   renderizarArticulosSeleccionados();
 }
 
@@ -132,7 +130,7 @@ function renderizarArticulosSeleccionados() {
     const li = document.createElement('li');
     li.innerHTML = `
       <div>
-        <strong>ID:</strong> ${a.idArticulo}<br>
+        <strong>ID:</strong> ${a.idArticulo} - ${a.nombreArticulo}<br>
         <label class="label">Cantidad: </label>
         <input class="input" id="inputCantidad-${a.idArticulo}" type="number" value="${a.cantidadArticulo}" min="1" max="999999" step="1"
                onchange="actualizarCantidad(${i}, this.value)">
@@ -248,7 +246,7 @@ async function previsualizarVenta() {
       const advContainer = document.getElementById('advertenciasVentaModal');
       if (resultado.advertencias && resultado.advertencias.length > 0) {
         advContainer.innerHTML = `
-          <div style="background-color: #e0f0ff; border: 1px solid #87bfff; padding: 1em; margin-top: 1em;">
+          <div style="background-color: #0a141dff; border: 1px solid #87bfff; padding: 1em; margin-top: 1em;">
             <h4 style="margin-top:0;">Avisos:</h4>
             <ul style="margin:0; padding-left: 1.2em;">
               ${resultado.advertencias.map(msg => `<li>${msg}</li>`).join('')}

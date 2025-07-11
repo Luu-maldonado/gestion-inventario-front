@@ -52,7 +52,7 @@ async function cargarArticulosActivos() {
 async function seleccionarArticulo(idArticulo, liElemento) {
   articuloSeleccionado = idArticulo;
 
-  document.querySelectorAll('.articulo-item').forEach(li => li.classList.remove('selected-row'));
+  document.querySelectorAll('.articulo-item').forEach(li => li.classList.remove('selected'));
   liElemento.classList.add('selected');
 
   const res = await fetch(`http://localhost:5000/api/Ventas/art-vent/${idArticulo}`);
