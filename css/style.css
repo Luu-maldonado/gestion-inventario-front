@@ -1208,7 +1208,7 @@ footer {
 }
 
 .boton-recargar {
-  background-color: #005577;
+  background-color: #004444;
   color: #fff;
   padding: 6px 12px;
   border-radius: 4px;
@@ -1223,7 +1223,7 @@ footer {
 
 .boton-recargar.disabled,
 .boton-recargar[disabled] {
-  background-color: #663333; 
+  background-color: #004444; 
   color: #ddd;
   pointer-events: none;
   cursor: default;
