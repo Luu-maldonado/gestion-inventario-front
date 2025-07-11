@@ -173,7 +173,9 @@ document.getElementById('btnGenerarOC').addEventListener('click', async () => {
     const res = await fetch('http://localhost:5000/MaestroArticulos/articulos/list-art-datos');
     const articulos = await res.json();
 
-    articulos.forEach(art => {
+    articulos
+    .filter(art => art.cgi != null && art.cgi !== 0)
+    .forEach(art => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>${art.idArticulo}</td>
