@@ -516,7 +516,7 @@
                     <tr><td colspan="14" style="text-align:center;">No hay artículos activos.</td></tr>
                 <?php else: ?>
                     <?php 
-                    $modalesAdvertencia = ""; // acumulador HTML
+                    $modalesAdvertencia = ""; 
                     foreach ($articulos as $art): 
                         $advertencias = [];
 
