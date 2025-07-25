@@ -1021,6 +1021,21 @@ footer {
   pointer-events: none;
 }
 
+.estado-pendiente {
+  background-color: rgba(0, 123, 255, 0.2); 
+  font-weight: bold;
+}
+
+.estado-enviada {
+  background-color: rgba(40, 167, 69, 0.2); 
+  font-weight: bold;
+}
+
+.estado-cancelada {
+  background-color: rgba(220, 53, 69, 0.2); 
+  font-weight: bold;
+}
+
 /* ===================
    🗂️ FIN ORDENES
    ===================*/
