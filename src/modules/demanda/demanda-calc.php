@@ -1,4 +1,4 @@
-<?php
+<?php 
 use GuzzleHttp\Client;
 
 $action = $_GET['action'] ?? 'calc';
@@ -8,13 +8,14 @@ $client = new Client(['base_uri' => 'http://localhost:5000']);
 $articulos = [];
 $error = null;
 $resultado = null;
+
 $tipoPrediccion = $_POST['tipoPrediccion'] ?? null;
 $tiposPrediccionNombres = [
     1=>'Promedio móvil',
     2=>'Promedio móvil ponderado',
     3=>'Suavización exponencial',
     4=>'Regresión lineal'
-  ];
+];
 $tipoPrediccionNombre = $tipoPrediccion && isset($tiposPrediccionNombres[$tipoPrediccion]) ? $tiposPrediccionNombres[$tipoPrediccion] : null;
 $periodo = $_POST['periodo'] ?? null;
 $alfa = $_POST['alfa'] ?? null;
@@ -48,19 +49,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $idArticulo && $tipoPrediccion && $
         $alfaMostrar = (float)$alfa;
     }
 
-try {
-    $res = $client->get('/api/Demanda/calcular-demanda', ['query' => $query]);
-    $resultado = json_decode($res->getBody()->getContents(), true);
-} catch (GuzzleHttp\Exception\ClientException $err) {
-    $responseBody = $err->getResponse()->getBody()->getContents();
-    $decoded = json_decode($responseBody, true);
-    $error = $decoded['mensaje'] ?? 'Error desconocido';
-}
+    try {
+        $res = $client->get('/api/Demanda/calcular-demanda', ['query' => $query]);
+        $resultado = json_decode($res->getBody()->getContents(), true);
+    } catch (GuzzleHttp\Exception\ClientException $err) {
+        $responseBody = $err->getResponse()->getBody()->getContents();
+        $decoded = json_decode($responseBody, true);
+        $error = $decoded['mensaje'] ?? 'Error desconocido';
+    }
 }
 ?>
 
 <?php if ($action === 'calc'): ?>
-
 <main style="display: flex; gap: 8px; padding: 8px;">
   <div style="width: 20%; border-right: 1px solid #444; overflow-y: auto;">
     <h4>Artículos activos</h4>
@@ -105,12 +105,12 @@ try {
           </label>
         </div>
         <p>&nbsp;</p>
-            <button id="btnCalcularDemanda" type="submit" class="boton-recargar" disabled>Calcular</button>
-        </form>
+        <button id="btnCalcularDemanda" type="submit" class="boton-recargar" disabled>Calcular</button>
+      </form>
     <?php endif; ?>
   </div>
-
-  <div style="flex-grow: 1; padding-left: 8px;">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div style="flex-grow: 1; padding-left: 8px;width: 80%;">
     <?php if ($resultado): ?>
       <h3>
         • Resultados <?= $tipoPrediccionNombre ? "({$tipoPrediccionNombre})" : '' ?>
@@ -123,34 +123,53 @@ try {
       <?php endif; ?>
 
       <?php if (!empty($resultado['valoresTabla'])): ?>
-        
         <table class="tabla-base">
-            <thead>
-            <tr><th>Mes</th><th>Cantidad (ventas)</th></tr>
-            </thead>
-            <tbody>
-            <?php
-                $totalFilas = count($resultado['valoresTabla']);
-                foreach ($resultado['valoresTabla'] as $i => $val):
-                $esUltima = ($i === $totalFilas - 1);
-            ?>
-                <tr class="<?= $esUltima ? 'fila-final-demanda' : '' ?>">
-                <td><?= $val['mes'] ?></td>
-                <td><?= $val['cantidad'] ?></td>
-                </tr>
-                <?php if ($esUltima): ?>
-                <tr class="leyenda-demanda">
-                    <td colspan="2"> Demanda calculada para el próximo periodo</td>
-                </tr>
-                <?php endif; ?>
-            <?php endforeach; ?>
-            </tbody>
+          <thead><tr><th>Mes</th><th>Cantidad (ventas)</th></tr></thead>
+          <tbody>
+          <?php foreach ($resultado['valoresTabla'] as $i => $val): ?>
+            <tr class="<?= $i === count($resultado['valoresTabla']) - 1 ? 'fila-final-demanda' : '' ?>">
+              <td><?= $val['mes'] ?></td>
+              <td><?= $val['cantidad'] ?></td>
+            </tr>
+            <?php if ($i === count($resultado['valoresTabla']) - 1): ?>
+              <tr class="leyenda-demanda">
+                <td colspan="2"> Demanda calculada para el próximo periodo</td>
+              </tr>
+            <?php endif; ?>
+          <?php endforeach; ?>
+          </tbody>
         </table>
 
-      <?php elseif (!empty($resultado['puntosXY'])): ?>
+      
+        <canvas id="graficoDemanda" width="70%" height="200"></canvas>
+        <script>
+          const ctx = document.getElementById('graficoDemanda').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: <?= json_encode(array_column($resultado['valoresTabla'], 'mes')) ?>,
+              datasets: [{
+                label: 'Demanda mensual',
+                data: <?= json_encode(array_column($resultado['valoresTabla'], 'cantidad')) ?>,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                fill: false,
+                tension: 0.1
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Proyección de la demanda' }
+              },
+              scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+            }
+          });
+        </script>
 
+      <?php elseif (!empty($resultado['puntosXY'])): ?>
         <table class="tabla-base">
-          <thead><tr><th>X</th><th>Y Real</th><th>Y Estimado</th></tr></thead>
+          <thead><tr><th>X</th><th>Real</th><th>Estimado</th></tr></thead>
           <tbody>
             <?php foreach ($resultado['puntosXY'] as $p): ?>
               <tr>
@@ -161,10 +180,42 @@ try {
             <?php endforeach; ?>
           </tbody>
         </table>
+        <canvas id="graficoXY" width="200" height="100"></canvas>
+        <script>
+          const ctxXY = document.getElementById('graficoXY').getContext('2d');
+          const puntosXY = <?= json_encode($resultado['puntosXY']) ?>;
+          new Chart(ctxXY, {
+            type: 'line',
+            data: {
+              labels: puntosXY.map(p => p.x),
+              datasets: [
+                {
+                  label: 'Y Real',
+                  data: puntosXY.map(p => p.yReal),
+                  borderColor: 'rgba(255, 99, 132, 1)',
+                  tension: 0.1
+                },
+                {
+                  label: 'Y Estimado',
+                  data: puntosXY.map(p => p.yEstimado),
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  tension: 0.1
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { position: 'top' },
+                title: { display: true, text: 'Regresión lineal' }
+              }
+            }
+          });
+        </script>
 
-        <p><strong>s2rr (Desviación entre la realidad y la Media) = </strong> <?= $resultado['s2rr'] ?></p>
-        <p><strong>s2rc (Desvío entre la Predicción y la Media) = </strong> <?= $resultado['s2rc'] ?></p>
-        <p><strong>r0 (Coef. de correlación) = </strong> <?= $resultado['r0'] ?></p>
+        <p><strong>s2rr = </strong> <?= $resultado['s2rr'] ?></p>
+        <p><strong>s2rc = </strong> <?= $resultado['s2rc'] ?></p>
+        <p><strong>r0 = </strong> <?= $resultado['r0'] ?></p>
       <?php endif; ?>
     <?php endif; ?>
   </div>
@@ -193,10 +244,8 @@ try {
 
   form.addEventListener('submit', function (err) {
     const tipoPrediccion = tipoPrediccionSelect.value;
-
     if (tipoPrediccion === '3') {
       const alfa = parseFloat(alfaInput.value);
-
       if (isNaN(alfa) || alfa < 0 || alfa > 1) {
         err.preventDefault();
         alert(' Ingrese un valor de alfa válido ');
@@ -205,10 +254,5 @@ try {
       }
     }
   });
-
-    document.querySelector('select[name="tipoPrediccion"]').addEventListener('change', function() {
-    document.getElementById('alfaInput').style.display = this.value == '3' ? 'block' : 'none';
-  });
 </script>
-
 <?php endif; ?>
