@@ -503,11 +503,11 @@
                     <th>Demanda estimada</th>
                     <th>Costo anual de almacén ($)</th>
                     <th>Tiempo de revisión (días)</th>
-                    <th>Stock Actual</th>
-                    <th>Stock Máx.</th>
-                    <th>Stock de Seguridad</th>
-                    <th>Punto de Pedido</th>
-                    <th>CGI</th>
+                    <th>Stock Actual (un.)</th>
+                    <th>Stock Máx. (un.)</th>
+                    <th>Stock de Seguridad (un.)</th>
+                    <th>Punto de Pedido (un.)</th>
+                    <th>CGI ($)</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
