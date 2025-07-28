@@ -139,7 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $idArticulo && $tipoPrediccion && $
           <?php endforeach; ?>
           </tbody>
         </table>
-
       
         <canvas id="graficoDemanda" width="70%" height="200"></canvas>
         <script>
@@ -171,13 +170,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $idArticulo && $tipoPrediccion && $
         <table class="tabla-base">
           <thead><tr><th>X</th><th>Real</th><th>Estimado</th></tr></thead>
           <tbody>
-            <?php foreach ($resultado['puntosXY'] as $p): ?>
-              <tr>
-                <td><?= $p['x'] ?></td>
-                <td><?= $p['yReal'] ?? '-' ?></td>
-                <td><?= $p['yEstimado'] ?></td>
-              </tr>
-            <?php endforeach; ?>
+		<?php foreach ($resultado['puntosXY'] as $j => $p): ?>
+		  <tr class="<?= $j === count($resultado['puntosXY']) - 1 ? 'fila-final-demanda' : '' ?>">
+		    <td><?= $p['x'] ?></td>
+		    <td><?= $p['yReal'] ?? '-' ?></td>
+		    <td><?= $p['yEstimado'] ?></td>
+		  </tr>
+		  <?php if ($j === count($resultado['puntosXY']) - 1): ?>
+		    <tr class="leyenda-demanda">
+		      <td colspan="3">Demanda calculada para el próximo periodo</td>
+		    </tr>
+		  <?php endif; ?>
+		<?php endforeach; ?>
           </tbody>
         </table>
         <canvas id="graficoXY" width="200" height="100"></canvas>
