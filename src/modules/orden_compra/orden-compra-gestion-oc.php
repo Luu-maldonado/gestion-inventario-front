@@ -98,7 +98,7 @@ const tr = document.createElement('tr');
 tr.innerHTML = `
   <td>${oc.nOrdenCompra}&nbsp;${advertenciaIcono}</td>
   <td>${oc.proveedor}</td>
-  <td>${oc.estado}</td>
+  <td class="${getClaseColorEstado(oc.estado)}">${oc.estado}</td>
   <td>${new Date(oc.fechaOrden).toLocaleDateString()}</td>
   <td>$${oc.totalPagar.toFixed(2)}</td>
   <td class="acciones-col">
@@ -108,6 +108,14 @@ tr.innerHTML = `
 
     tbody.appendChild(tr);
   });
+}
+
+function getClaseColorEstado(estado) {
+  const est = estado.toLowerCase();
+  if (est === 'pendiente') return 'estado-pendiente';
+  if (est === 'enviada') return 'estado-enviada';
+  if (est === 'cancelada') return 'estado-cancelada';
+  return ''; 
 }
 
 async function verDetalles(nOrdenCompra) {
