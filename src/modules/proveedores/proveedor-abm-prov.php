@@ -216,9 +216,9 @@ form.addEventListener('submit', async e => {
                         <td>${p.mail || ''}</td>
                         <td>${p.telefono || ''}</td>
                         <td>
-                            <button onclick='editarProveedor(${JSON.stringify(p)})'>✏️</button>
-                            <button onclick='eliminarProveedor(${p.idProveedor})' style="color:red;">❌</button>
-                            <button onclick='suspenderProveedor(${p.idProveedor})' style="color:orange;">S</button>
+                            <button onclick='editarProveedor(${JSON.stringify(p)})' class="boton-icono">✏️</button>
+                            <button onclick='eliminarProveedor(${p.idProveedor})' style="color:red;" class="boton-icono">❌</button>
+                            <button onclick='suspenderProveedor(${p.idProveedor})' style="color:orange;" class="boton-icono">S</button>
                         </td>
                     `;
                     tbody.appendChild(tr);
