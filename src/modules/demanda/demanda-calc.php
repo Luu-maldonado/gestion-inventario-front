@@ -217,8 +217,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $idArticulo && $tipoPrediccion && $
           });
         </script>
 
-        <p><strong>s2rr = </strong> <?= $resultado['s2rr'] ?></p>
-        <p><strong>s2rc = </strong> <?= $resultado['s2rc'] ?></p>
+        <p><strong>s2_rr = </strong> <?= $resultado['s2_rr'] ?></p>
+        <p><strong>s2_rc = </strong> <?= $resultado['s2_rc'] ?></p>
+        <p><strong>s_rr = </strong> <?= $resultado['s_rr'] ?></p>
+        <p><strong>s_rc = </strong> <?= $resultado['s_rc'] ?></p>
         <p><strong>r0 = </strong> <?= $resultado['r0'] ?></p>
       <?php endif; ?>
     <?php endif; ?>
